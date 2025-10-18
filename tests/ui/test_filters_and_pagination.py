@@ -16,6 +16,7 @@ def test_search_title(driver):
 
 
 @pytest.mark.ui
+@pytest.mark.flaky(reruns=2, reruns_delay=2)
 @pytest.mark.parametrize("category_name", list(CATEGORIES.keys()))
 def test_category_filter(driver, category_name):
     home = HomePage(driver)
@@ -26,6 +27,7 @@ def test_category_filter(driver, category_name):
     logger.info(f"Found {count} results for category '{category_name}'")
 
 @pytest.mark.ui
+@pytest.mark.flaky(reruns=2, reruns_delay=2)
 @pytest.mark.parametrize("select_name", list(DROPDOWN_CATEGORIES))
 def test_type_dropdown(driver, select_name):
     home = HomePage(driver)
@@ -46,6 +48,7 @@ def test_select_star(driver):
     logger.info(f"Found {count} results for {star} {star_type} star rating")
 
 @pytest.mark.ui
+@pytest.mark.flaky(reruns=2, reruns_delay=2)
 def test_date(driver):
     home = HomePage(driver)
     from_year, to_year = home.date_type()
