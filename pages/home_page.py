@@ -8,6 +8,7 @@ class HomePage(BasePage):
     SEARCH_INPUT = (By.CSS_SELECTOR, "input[type='text']")
     GRID_ITEMS = (By.XPATH, "//div[@class='grid grid-cols-3 gap-4']//div")
     NO_RESULT = (By.XPATH, "//div[text()='No results found.']")
+    LAST_PAGE_ERROR = (By.XPATH, "//div[@class='w-full h-full flex flex-col items-center justify-center text-white']")
     POPULAR_lINK = (By.LINK_TEXT, "Popular")
     TREND_LINK = (By.LINK_TEXT, "Trend")
     NEWEST_LINK = (By.LINK_TEXT, "Newest")
@@ -22,6 +23,7 @@ class HomePage(BasePage):
     FULL_STAR = "//div[@class='rc-rate-star-second']"
     NEXT_BUTTON = (By.XPATH, "//a[text()='Next']")
     PREVIOUS_BUTTON = (By.XPATH, "//a[text()='Previous']")
+    LAST_NAVIGATION_PAGE = (By.XPATH, "//a[@aria-label='Page 53111']")
 
     def search(self, text):
         self.enter_text(self.SEARCH_INPUT, text)
@@ -98,4 +100,10 @@ class HomePage(BasePage):
             self.temp_sleep()
         except Exception:
             raise
+
+    def select_last_page(self):
+        self.click(self.LAST_NAVIGATION_PAGE)
+        self.temp_sleep()
+        text = self.find(self.LAST_PAGE_ERROR).text
+        return text
 

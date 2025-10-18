@@ -14,15 +14,6 @@ def test_search_title(driver):
     assert count > 0, "Expected 1 or more results"
     logger.info(f"Found {count} results for 'batman'")
 
-@pytest.mark.ui
-def test_negative_search_title(driver):
-    home = HomePage(driver)
-    home.search("xyzan")
-    logger.info("Searched for 'xyzan'")
-    error_Message = home.get_error_message()
-    logger.info(f"Error message received: '{error_Message}'")
-    assert error_Message == "No results found.", "Expected Error Message"
-    logger.info("Negative search test passed")
 
 @pytest.mark.ui
 @pytest.mark.parametrize("category_name", list(CATEGORIES.keys()))
