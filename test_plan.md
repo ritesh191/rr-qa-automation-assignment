@@ -27,6 +27,14 @@ Automate functional UI and API tests for https://tmdb-discover.surge.sh/
 | TC_NEG_03 | `test_negative_genre_selection` | Multiple Genre Selection | Selects 6 different genres of a random type (Movie or TV) expecting no results and validates "No results found" error handling | ✅ Automated |
 | TC_NEG_04 | `test_negative_slug_access` | Slug-based URL Access | Tests direct URL access with slugs (/popular, /trend, /newest, /top-rated) and validates that slug-based navigation doesn't work as expected. Parametrized for 4 slugs | ✅ Automated |
 
+### API Test Cases (test_api_validation.py)
+
+| ID | Test Function | Feature | Description | Status |
+|----|---------------|---------|-------------|--------|
+| TC_API_01 | `test_api_popular_movies_schema` | Popular Movies API | Tests TMDB API endpoint for popular movies (/movie/popular). Validates 200 status code and verifies response contains expected data structure with results and total_results | ✅ Automated |
+| TC_API_02 | `test_api_search_movie` | Movie Search API | Tests TMDB movie search endpoint (/search/movie) with query parameter 'abc'. Validates response structure including required fields (id, title, overview, release_date, vote_average, etc.) and ensures results are returned | ✅ Automated |
+| TC_API_03 | `test_api_search_no_results` | Search No Results (Negative) | Tests search endpoint with non-existent query ('xyzabc123nonexistent'). Validates that API returns 200 status with empty results array and total_results = 0 | ✅ Automated |
+
 ## Test Design Techniques
 - Equivalence partitioning (rating/year ranges)
 - Boundary value analysis (page numbers for pagination)
