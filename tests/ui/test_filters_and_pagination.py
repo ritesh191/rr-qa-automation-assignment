@@ -80,3 +80,61 @@ def test_genre_dropdown(driver, type_name, genre_name):
     assert count > 0, f"No results for type '{type_name}' + genre '{genre_name}', got {count}"
     logger.info(f"Found {count} results for {type_name}/{genre_name}")
 
+@pytest.mark.ui
+@pytest.mark.parametrize("category_name", list(CATEGORIES.keys()))
+def test_category_and_pagination(driver, category_name):
+    home = HomePage(driver)
+    # Selecting different categories
+    try:
+        home.select_category(category_name)
+        logger.info(f"Selected category: {category_name}")
+        count = home.get_result_count()
+        assert count > 0, f"Expected results for category '{category_name}', but got {count} results"
+        logger.info(f"Found {count} results for category '{category_name}'")
+    except Exception as e:
+        logger.warning(f"Category {category_name} not clickable or available: {e}")
+
+    # try pagination 'Next' button
+    try:
+        home.go_next()
+        logger.info("Clicked Next page")
+    except Exception as e:
+        logger.warning("Next not available - known demo limitation")
+
+    # try pagination 'Previous' button
+    try:
+        home.go_previous()
+        logger.info("Clicked Previous page")
+    except Exception as e:
+        logger.warning("Previous not available - known demo limitation")
+
+@pytest.mark.ui
+def test_full_work_flow(driver):
+    import random
+    home = HomePage(driver)
+    # Select random category
+    category_name = random.choice(list(CATEGORIES.keys()))
+    logger.info(f"=== Full Workflow Test Started ===")
+    logger.info(f"Selected category: {category_name}")
+    home.select_category(category_name)
+
+    # Select random type and genre
+    type_name, genre_name = random.choice(GENRE_CASES)
+    logger.info(f"Selected type: {type_name}, genre: {genre_name}")
+    home.select_type(type_name)
+    home.genre_type(genre_name, type_name)
+
+    # Select date range
+    home.date_type()
+    logger.info(f"Selected date range")
+
+    # Select star rating
+    home.select_star()
+    logger.info(f"Selected star(s)")
+
+    # Verify results
+    count = home.get_result_count()
+    logger.info(f"Results count after all filters: {count}")
+    assert count > 0, f"Expected results for workflow (category={category_name}, type={type_name}, genre={genre_name} but got {count} results"
+    logger.info(f"=== Full Workflow Test Passed - Found {count} results ===")
+

@@ -20,6 +20,8 @@ class HomePage(BasePage):
     YEAR_DROPDOWN_TO = (By.XPATH, "//div[contains(@class, 'flex items-center')]//div[@class='w-24 css-2b097c-container'][2]")
     HALF_STAR = "//div[@class='rc-rate-star-first']"
     FULL_STAR = "//div[@class='rc-rate-star-second']"
+    NEXT_BUTTON = (By.XPATH, "//a[text()='Next']")
+    PREVIOUS_BUTTON = (By.XPATH, "//a[text()='Previous']")
 
     def search(self, text):
         self.enter_text(self.SEARCH_INPUT, text)
@@ -81,4 +83,19 @@ class HomePage(BasePage):
             raise ValueError(f"Missing xpath for type '{type_name}' and genre '{genre_name}'")
         self.click((By.XPATH, xpath))
         self.temp_sleep()
+
+    def go_next(self):
+        try:
+            self.click(self.NEXT_BUTTON)
+            self.temp_sleep()
+        except Exception:
+            # If next not present, raise to let test handle negative cases
+            raise
+
+    def go_previous(self):
+        try:
+            self.click(self.PREVIOUS_BUTTON)
+            self.temp_sleep()
+        except Exception:
+            raise
 
