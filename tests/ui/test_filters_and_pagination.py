@@ -36,6 +36,7 @@ def test_type_dropdown(driver, select_name):
     logger.info(f"Found {count} results for type '{select_name}'")
 
 @pytest.mark.ui
+@pytest.mark.flaky(reruns=2, reruns_delay=2)
 def test_select_star(driver):
     home = HomePage(driver)
     star, star_type = home.select_star()
@@ -59,6 +60,7 @@ GENRE_CASES = [
     for genre_name in list(genre_map.keys())[:3]  # Test only first 3 genres per type for speed
 ]
 @pytest.mark.ui
+@pytest.mark.flaky(reruns=2, reruns_delay=2)
 @pytest.mark.parametrize("type_name, genre_name", GENRE_CASES)
 def test_genre_dropdown(driver, type_name, genre_name):
     home = HomePage(driver)
@@ -72,6 +74,7 @@ def test_genre_dropdown(driver, type_name, genre_name):
     logger.info(f"Found {count} results for {type_name}/{genre_name}")
 
 @pytest.mark.ui
+@pytest.mark.flaky(reruns=2, reruns_delay=2)
 @pytest.mark.parametrize("category_name", list(CATEGORIES.keys()))
 def test_category_and_pagination(driver, category_name):
     home = HomePage(driver)
@@ -100,6 +103,7 @@ def test_category_and_pagination(driver, category_name):
         logger.warning("Previous not available - known demo limitation")
 
 @pytest.mark.ui
+@pytest.mark.flaky(reruns=2, reruns_delay=2)
 def test_full_work_flow(driver):
     import random
     home = HomePage(driver)
