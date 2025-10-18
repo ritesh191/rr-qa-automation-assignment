@@ -1,3 +1,4 @@
+import random
 import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -13,6 +14,9 @@ class BasePage:
     def find_all(self, locator):
         return self.wait.until(EC.presence_of_all_elements_located(locator))
 
+    def select_all(self, locator):
+        return self.wait.until(EC.visibility_of_all_elements_located(locator))
+
     def click(self, locator):
         el = self.find(locator)
         el.click()
@@ -27,4 +31,10 @@ class BasePage:
 
     def temp_sleep(self):
         time.sleep(5)
+
+    def random_year(self):
+        return random.randint(1900, 2024)
+
+    def random_star(self):
+        return random.randint(1, 5)
 
