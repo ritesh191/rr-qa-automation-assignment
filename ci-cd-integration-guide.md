@@ -58,14 +58,6 @@
 - Trigger on: push to main, pull requests, manual dispatch
 - Upload artifacts with `actions/upload-artifact@v3`
 
-**GitLab CI** (`.gitlab-ci.yml`):
-
-- Use `python:3.9` Docker image
-- Install Chrome in before_script
-- Use GitLab cache for pip packages
-- Store test reports as artifacts
-- Trigger on: merge requests, main branch
-
 **Jenkins** (`Jenkinsfile`):
 
 - Use declarative pipeline
@@ -153,23 +145,4 @@
 - Monitor test execution time trends
 - Review and fix flaky tests
 
-## Document Structure in README
-
-Add new section titled "CI/CD Integration" with:
-
-1. Overview of approach
-2. Quick start for each platform (with working config files)
-3. Environment variables needed
-4. Code modifications made for CI compatibility
-5. Troubleshooting common issues
-6. Advanced configurations (multi-browser, scheduled runs)
-
-## Files to Create/Modify
-
-- `README.md` - Add CI/CD Integration section (after line 82)
-- Example configs to include inline or reference:
-- GitHub Actions YAML example
-- GitLab CI YAML example  
-- Jenkins pipeline example
-- Azure DevOps YAML example
 
