@@ -1,7 +1,32 @@
 # Test Plan - rr-qa-automation-assignment
 
 ## Scope
-Automate functional UI and API tests for https://tmdb-discover.surge.sh/
+Automate functional UI and API tests for https://tmdb-discover.surge.sh/ and https://api.themoviedb.org/3
+
+## Test Strategy
+
+### Positive Scenarios (UI)
+All positive scenarios cover the main filter types available on the home page:
+- **Category filters:** Popular, Trend, Newest, Top Rated
+- **Type filters:** TV Shows, Movies
+- **Genre filters:** Multiple genres for both Movies and TV Shows
+- **Year range filters:** From/To year selection
+- **Rating filters:** Star ratings (1-5 stars, half and full)
+- **Pagination:** Next/Previous navigation
+- **Integration test:** End-to-end workflow combining all filters with random data selection
+
+### Negative Scenarios (UI)
+Negative scenarios focus on edge cases and error handling:
+- **Invalid search queries:** Non-existent movie/show names
+- **Pagination errors:** Last page navigation (known limitation)
+- **Multiple genre selection:** Selecting too many genres leading to no results
+- **Slug-based URLs:** Direct URL access with category slugs (e.g., /popular, /trend)
+
+### API Scenarios
+API tests validate TMDB API endpoints:
+- **Popular movies endpoint:** Schema validation and response structure
+- **Search functionality:** Query parameters and result validation
+- **Negative search:** Non-existent queries returning empty results
 
 ## Test Cases
 
