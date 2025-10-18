@@ -5,9 +5,17 @@ class HomePage(BasePage):
     # Locators
     SEARCH_INPUT = (By.CSS_SELECTOR, "input[type='text']")
     GRID_ITEMS = (By.XPATH, "//div[@class='grid grid-cols-3 gap-4']//div")
+    NO_RESULT = (By.XPATH, "//div[text()='No results found.']")
 
     def search(self, text):
-        search_box = self.find(self.SEARCH_INPUT)
-        search_box.clear()
-        search_box.send_keys(text)
+        self.enter_text(self.SEARCH_INPUT, text)
+        self.temp_sleep()
+
+    def get_result_count(self):
+        items = self.find_all(self.GRID_ITEMS)
+        return len(items)
+
+    def get_error_message(self):
+        text = self.find(self.NO_RESULT).text
+        return text
 
